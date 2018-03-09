@@ -14,4 +14,6 @@ Insert admin tyoe user before running project
 
 
 
+###Running project
+Run login.java (right click on it and select run or shift+F6)
 
