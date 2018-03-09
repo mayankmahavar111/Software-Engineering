@@ -134,7 +134,8 @@ try{
         }
         else{
             if (type.equalsIgnoreCase("teacher")){
-                
+                TeacherHome home = new TeacherHome(res.getString("username"));
+                home.setVisible(true);
             }
             else{
                 StudentHome home = new StudentHome(res.getString("username"));
@@ -151,10 +152,6 @@ try{
 catch(Exception e){
     System.out.print(e);
 }
-
-
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB1ActionPerformed

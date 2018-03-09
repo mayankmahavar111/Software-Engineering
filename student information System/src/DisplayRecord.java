@@ -23,10 +23,14 @@ public class DisplayRecord extends javax.swing.JFrame {
     /**
      * Creates new form DisplayRecord
      */
+    String temp= null;
     public DisplayRecord() {
         initComponents();
     }
-
+    public DisplayRecord(String s) {
+        initComponents();
+        temp=s;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,9 +259,17 @@ public class DisplayRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Record record = new Record();
-        record.setVisible(true);
-        this.dispose();
+        if (temp.equalsIgnoreCase("teacher") ==false){
+            Record record = new Record();
+            record.setVisible(true);
+            this.dispose();
+        }
+        else{
+            TeacherHome record = new TeacherHome();
+            record.setVisible(true);
+            this.dispose();
+        
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
