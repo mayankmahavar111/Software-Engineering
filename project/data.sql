@@ -1,6 +1,12 @@
+create table user (
+username text NOT NULL PRIMARY KEY,
+password text NOT NULL,
+type text NOT NULL 
+);
+
 
  create table IF NOT EXISTS student (
-  student_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  student_id INTEGER NOT NULL PRIMARY KEY ,
   name TEXT not NULL ,
   phone integer NOT NULL ,
   dob date NOT NULL ,
