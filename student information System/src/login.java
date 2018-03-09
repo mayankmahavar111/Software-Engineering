@@ -16,7 +16,7 @@ public class login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */ 
-    public AdminHome home;
+ 
     public Connection cn;
     public Statement st;
     public login() {
@@ -127,9 +127,21 @@ try{
     System.out.print(sql);
     ResultSet res = st.executeQuery(sql);
     if (res.next()){
-        System.out.print(res.getString(1)+"\n"+res.getString(2));
-        home = new AdminHome() ;
-        home.setVisible(true);
+        //System.out.print(res.getString(1)+"\n"+res.getString(2));
+        if (type.equalsIgnoreCase("admin")){
+            AdminHome home = new AdminHome() ;
+            home.setVisible(true);
+        }
+        else{
+            if (type.equalsIgnoreCase("teacher")){
+                
+            }
+            else{
+                StudentHome home = new StudentHome(res.getString("username"));
+                home.setVisible(true);
+            }  
+        }
+        
         this.dispose();
     }
     else{
