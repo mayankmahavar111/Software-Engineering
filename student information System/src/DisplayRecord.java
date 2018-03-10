@@ -23,7 +23,7 @@ public class DisplayRecord extends javax.swing.JFrame {
     /**
      * Creates new form DisplayRecord
      */
-    String temp= null;
+    String temp= "";
     public DisplayRecord() {
         initComponents();
     }
@@ -260,12 +260,14 @@ public class DisplayRecord extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (temp.equalsIgnoreCase("teacher") ==false){
+            System.out.print("Inside record");
             Record record = new Record();
             record.setVisible(true);
             this.dispose();
         }
         else{
-            TeacherHome record = new TeacherHome();
+            System.out.print("Inside teacher");
+            TeacherHome record = new TeacherHome(temp);
             record.setVisible(true);
             this.dispose();
         
