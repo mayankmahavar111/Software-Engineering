@@ -25,6 +25,7 @@ public class StudentInfor extends javax.swing.JFrame {
      */
     
     String username=null;
+    
     public StudentInfor() {
         initComponents();
     }
@@ -36,7 +37,7 @@ public class StudentInfor extends javax.swing.JFrame {
         Connection con = null;
         ResultSet rs = null;
         PreparedStatement ps=null;
-        
+        int temp = 0;
         try {
                 Class.forName("com.mysql.jdbc.Driver");
                 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student information?zeroDateTimeBehavior=convertToNull","root","");
@@ -45,13 +46,19 @@ public class StudentInfor extends javax.swing.JFrame {
                 ps = con.prepareStatement(sql);                
                 rs=ps.executeQuery();
                 while(rs.next()){
+                    temp=1;
                     TF2.setText(rs.getString("name"));
                     TF1.setText(rs.getString("student_id"));
                     TF3.setText(rs.getString("phone"));
                     TF4.setText(rs.getString("dob"));
                     TF5.setText(rs.getString("address"));
                 }
+                if (temp==1)
+                    JOptionPane.showMessageDialog(null, "name : "+TF2.getText()+"\nid : "+TF1.getText()+"\nphone : "+TF3.getText()+"\ndob : " +TF4.getText()+"\naddress  : "+TF5.getText());
+                else
+                    JOptionPane.showMessageDialog(null,"Unable to fetch");
             } catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex);
                 Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
@@ -78,6 +85,7 @@ public class StudentInfor extends javax.swing.JFrame {
         CB1 = new javax.swing.JCheckBox();
         update = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +138,13 @@ public class StudentInfor extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("exit");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,9 +185,12 @@ public class StudentInfor extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(update))
-                    .addComponent(jButton1))
+                        .addComponent(update)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +222,9 @@ public class StudentInfor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(update)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5)))
         );
 
         pack();
@@ -267,6 +287,10 @@ this.dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +334,7 @@ this.dispose();
     private javax.swing.JTextField TF4;
     private javax.swing.JTextField TF5;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

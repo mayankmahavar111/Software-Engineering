@@ -52,6 +52,7 @@ public class StudentDetails extends javax.swing.JFrame {
         TF6 = new javax.swing.JTextField();
         update = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +102,13 @@ public class StudentDetails extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("exit");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,9 +143,12 @@ public class StudentDetails extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(update)
-                            .addComponent(jButton1)))
-                    .addComponent(jButton2))
-                .addContainerGap(199, Short.MAX_VALUE))
+                            .addComponent(jButton1))))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,14 +184,50 @@ public class StudentDetails extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(update)
                 .addGap(33, 33, 33)
-                .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton5)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void test(String id){
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps=null;
+    try {
+                Class.forName("com.mysql.jdbc.Driver");
+                con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student information?zeroDateTimeBehavior=convertToNull","root","");
+                String sql="select * from student where student_id ="+id+"";
+                System.out.print(sql);
+                ps = con.prepareStatement(sql);                
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    TF2.setText(id);
+                    TF3.setText(rs.getString("name"));
+                    TF4.setText(rs.getString("phone"));
+                    TF5.setText(rs.getString("dob"));
+                    TF6.setText(rs.getString("address"));
+                    TF2.setEditable(true);
+                    TF3.setEditable(true);
+                    TF4.setEditable(true);
+                    TF5.setEditable(true);
+                    TF6.setEditable(true);
+                    update.setEnabled(true);
+                    
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                //JOptionPane.showMessageDialog(null, ex);
+                Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String id= TF1.getText();
+        test(id);
+        /*
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement ps=null;
@@ -207,7 +254,7 @@ public class StudentDetails extends javax.swing.JFrame {
                 }
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
 // TODO add your handling code here:
         
 
@@ -254,6 +301,10 @@ public class StudentDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,6 +349,7 @@ public class StudentDetails extends javax.swing.JFrame {
     private javax.swing.JTextField TF6;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
